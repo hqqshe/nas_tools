@@ -144,18 +144,18 @@ naive_config() {
         echo "----------------------------------------------------------------"
         break
     done
-    
-    while :; do
-        echo
-        echo -e "请输入一个 ${magenta}邮箱${none}，邮箱不能乱输，格式要对。"
-        read -p "(例如：name@abc.com): " email
-        [ -z "$email" ] && error && continue
-        echo
-        echo
-        echo -e "$yellow 你的邮箱 = $cyan$email$none"
-        echo "----------------------------------------------------------------"
-        break
-    done
+    email="demo@hitk.me"
+    # while :; do
+    #     echo
+    #     echo -e "请输入一个 ${magenta}邮箱${none}，邮箱不能乱输，格式要对。"
+    #     read -p "(例如：name@abc.com): " email
+    #     [ -z "$email" ] && error && continue
+    #     echo
+    #     echo
+    #     echo -e "$yellow 你的邮箱 = $cyan$email$none"
+    #     echo "----------------------------------------------------------------"
+    #     break
+    # done
     get_ip
     echo
     echo
@@ -167,26 +167,26 @@ naive_config() {
     echo "----------------------------------------------------------------"
     echo
 
-    while :; do
+    # while :; do
 
-        read -p "$(echo -e "(是否已经正确解析: [${magenta}Y$none]):") " record
-        if [[ -z "$record" ]]; then
-            error
-        else
-            if [[ "$record" == [Yy] ]]; then
-                domain_check
-                echo
-                echo
-                echo -e "$yellow 域名解析 = ${cyan}我确定已经有解析了$none"
-                echo "----------------------------------------------------------------"
-                echo
-                break
-            else
-                error
-            fi
-        fi
+    #     read -p "$(echo -e "(是否已经正确解析: [${magenta}Y$none]):") " record
+    #     if [[ -z "$record" ]]; then
+    #         error
+    #     else
+    #         if [[ "$record" == [Yy] ]]; then
+    #             domain_check
+    #             echo
+    #             echo
+    #             echo -e "$yellow 域名解析 = ${cyan}我确定已经有解析了$none"
+    #             echo "----------------------------------------------------------------"
+    #             echo
+    #             break
+    #         else
+    #             error
+    #         fi
+    #     fi
 
-    done
+    # done
 
 }
 
@@ -312,7 +312,9 @@ caddy_config() {
                           "hide_ip": true,
                           "hide_via": true,
                           "probe_resistance": {}
-                        },
+                        }]
+                    }, {
+                      "handle": [
                          {
                           "auth_user_deprecated": "${domain}02",
                           "auth_pass_deprecated": "Han.2002",
@@ -320,7 +322,9 @@ caddy_config() {
                           "hide_ip": true,
                           "hide_via": true,
                           "probe_resistance": {}
-                        },
+                        }]
+                    }, {
+                      "handle": [
                          {
                           "auth_user_deprecated": "${domain}03",
                           "auth_pass_deprecated": "Han.2003",
@@ -328,7 +332,9 @@ caddy_config() {
                           "hide_ip": true,
                           "hide_via": true,
                           "probe_resistance": {}
-                        },
+                        }]
+                    }, {
+                      "handle": [
                          {
                           "auth_user_deprecated": "${domain}04",
                           "auth_pass_deprecated": "Han.2004",
@@ -336,7 +342,9 @@ caddy_config() {
                           "hide_ip": true,
                           "hide_via": true,
                           "probe_resistance": {}
-                        },
+                        }]
+                    }, {
+                      "handle": [
                          {
                           "auth_user_deprecated": "${domain}05",
                           "auth_pass_deprecated": "Han.2005",
@@ -344,47 +352,54 @@ caddy_config() {
                           "hide_ip": true,
                           "hide_via": true,
                           "probe_resistance": {}
-                        },
-                         {
+                        }]
+                    },  {
+                      "handle": [ {
                           "auth_user_deprecated": "${domain}06",
                           "auth_pass_deprecated": "Han.2006",
                           "handler": "forward_proxy",
                           "hide_ip": true,
                           "hide_via": true,
                           "probe_resistance": {}
-                        },
-                         {
+                        }]
+                    }, {
+                      "handle": [{
                           "auth_user_deprecated": "${domain}07",
                           "auth_pass_deprecated": "Han.2007",
                           "handler": "forward_proxy",
                           "hide_ip": true,
                           "hide_via": true,
                           "probe_resistance": {}
-                        },{
+                        }]
+                    }, {
+                      "handle": [{
                           "auth_user_deprecated": "${domain}08",
                           "auth_pass_deprecated": "Han.2008",
                           "handler": "forward_proxy",
                           "hide_ip": true,
                           "hide_via": true,
                           "probe_resistance": {}
-                        },{
+                        }]
+                    }, {
+                      "handle": [{
                           "auth_user_deprecated": "${domain}09",
                           "auth_pass_deprecated": "Han.2009",
                           "handler": "forward_proxy",
                           "hide_ip": true,
                           "hide_via": true,
                           "probe_resistance": {}
-                        },{
+                        }]
+                    }, {
+                      "handle": [
+                        {
                           "auth_user_deprecated": "${domain}10",
                           "auth_pass_deprecated": "Han.2010",
                           "handler": "forward_proxy",
                           "hide_ip": true,
                           "hide_via": true,
                           "probe_resistance": {}
-                        },
-                      ]
-                    },
-                    {
+                        }]
+                    }, {
                       "match": [
                         {
                           "host": [
