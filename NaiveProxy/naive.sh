@@ -111,8 +111,8 @@ naive_config() {
 
     while :; do
         echo -e "请输入 "$yellow"NaiveProxy"$none" 端口 ["$magenta"1-65535"$none"]，不能选择 "$magenta"80"$none"端口"
-        read -p "$(echo -e "(默认端口: ${cyan}443$none):")" naive_port
-        [ -z "$naive_port" ] && naive_port=443
+        read -p "$(echo -e "(默认端口: ${cyan}4433$none):")" naive_port
+        [ -z "$naive_port" ] && naive_port=4433
         case $naive_port in
         80)
             echo
@@ -140,7 +140,7 @@ naive_config() {
         [ -z "$domain" ] && error && continue
         echo
         echo
-        echo -e "$yellow 你的域名 = $cyan$domain$none"
+        echo -e "$yellow 你的域名 = $cyan$domain.hellotk.me$none"
         echo "----------------------------------------------------------------"
         break
     done
@@ -159,11 +159,11 @@ naive_config() {
     get_ip
     echo
     echo
-    echo -e "$yellow 请将 $magenta$domain$none $yellow 解析到: $cyan$ip$none"
+    echo -e "$yellow 请将 $magenta$domain.hellotk.me$none $yellow 解析到: $cyan$ip$none"
     echo
-    echo -e "$yellow 请将 $magenta$domain$none $yellow 解析到: $cyan$ip$none"
+    echo -e "$yellow 请将 $magenta$domain.hellotk.me$none $yellow 解析到: $cyan$ip$none"
     echo
-    echo -e "$yellow 请将 $magenta$domain$none $yellow 解析到: $cyan$ip$none"
+    echo -e "$yellow 请将 $magenta$domain.hellotk.me$none $yellow 解析到: $cyan$ip$none"
     echo "----------------------------------------------------------------"
     echo
 
@@ -200,7 +200,7 @@ install_info() {
     echo
     echo -e "$yellow NaiveProxy 端口 = $cyan$naive_port$none"
     echo
-    echo -e "$yellow 你的域名 = $cyan$domain$none"
+    echo -e "$yellow 你的域名 = $cyan$domain.hellotk.me$none"
     echo
     echo -e "$yellow 域名解析 = ${cyan}我确定已经有解析了$none"
     echo
@@ -222,13 +222,13 @@ domain_check() {
     # test_domain=$(dig $domain +short)
     # test_domain=$(ping $domain -c 1 -4 | grep -oE -m1 "([0-9]{1,3}\.){3}[0-9]{1,3}")
     # test_domain=$(wget -qO- --header='accept: application/dns-json' "https://cloudflare-dns.com/dns-query?name=$domain&type=A" | grep -oE "([0-9]{1,3}\.){3}[0-9]{1,3}" | head -1)
-    test_domain=$(curl -sH 'accept: application/dns-json' "https://cloudflare-dns.com/dns-query?name=$domain&type=A" | grep -oE "([0-9]{1,3}\.){3}[0-9]{1,3}" | head -1)
+    test_domain=$(curl -sH 'accept: application/dns-json' "https://cloudflare-dns.com/dns-query?name=$domain.hellotk.me&type=A" | grep -oE "([0-9]{1,3}\.){3}[0-9]{1,3}" | head -1)
     echo $ip_all | grep $test_domain
     if [[ $? != '0' ]]; then
         echo
         echo -e "$red 检测域名解析错误....$none"
         echo
-        echo -e " 你的域名: $yellow$domain$none 未解析到: \n$cyan$ip_all$none"
+        echo -e " 你的域名: $yellow$domain.hellotk.me$none 未解析到: \n$cyan$ip_all$none"
         echo
         echo -e " 你的域名当前解析到: $cyan$test_domain$none"
         echo
@@ -285,8 +285,6 @@ install_certbot() {
 
 
 caddy_config() {
-    password=$uuid
-
     cat > /etc/caddy/caddy_config.json << EOF
 {
   "admin": {
@@ -308,20 +306,89 @@ caddy_config() {
                     {
                       "handle": [
                         {
-                          "auth_user_deprecated": "User",
-                          "auth_pass_deprecated": "$password",
+                          "auth_user_deprecated": "${domain}01",
+                          "auth_pass_deprecated": "Han.2001",
                           "handler": "forward_proxy",
                           "hide_ip": true,
                           "hide_via": true,
                           "probe_resistance": {}
-                        }
+                        },
+                         {
+                          "auth_user_deprecated": "${domain}02",
+                          "auth_pass_deprecated": "Han.2002",
+                          "handler": "forward_proxy",
+                          "hide_ip": true,
+                          "hide_via": true,
+                          "probe_resistance": {}
+                        },
+                         {
+                          "auth_user_deprecated": "${domain}03",
+                          "auth_pass_deprecated": "Han.2003",
+                          "handler": "forward_proxy",
+                          "hide_ip": true,
+                          "hide_via": true,
+                          "probe_resistance": {}
+                        },
+                         {
+                          "auth_user_deprecated": "${domain}04",
+                          "auth_pass_deprecated": "Han.2004",
+                          "handler": "forward_proxy",
+                          "hide_ip": true,
+                          "hide_via": true,
+                          "probe_resistance": {}
+                        },
+                         {
+                          "auth_user_deprecated": "${domain}05",
+                          "auth_pass_deprecated": "Han.2005",
+                          "handler": "forward_proxy",
+                          "hide_ip": true,
+                          "hide_via": true,
+                          "probe_resistance": {}
+                        },
+                         {
+                          "auth_user_deprecated": "${domain}06",
+                          "auth_pass_deprecated": "Han.2006",
+                          "handler": "forward_proxy",
+                          "hide_ip": true,
+                          "hide_via": true,
+                          "probe_resistance": {}
+                        },
+                         {
+                          "auth_user_deprecated": "${domain}07",
+                          "auth_pass_deprecated": "Han.2007",
+                          "handler": "forward_proxy",
+                          "hide_ip": true,
+                          "hide_via": true,
+                          "probe_resistance": {}
+                        },{
+                          "auth_user_deprecated": "${domain}08",
+                          "auth_pass_deprecated": "Han.2008",
+                          "handler": "forward_proxy",
+                          "hide_ip": true,
+                          "hide_via": true,
+                          "probe_resistance": {}
+                        },{
+                          "auth_user_deprecated": "${domain}09",
+                          "auth_pass_deprecated": "Han.2009",
+                          "handler": "forward_proxy",
+                          "hide_ip": true,
+                          "hide_via": true,
+                          "probe_resistance": {}
+                        },{
+                          "auth_user_deprecated": "${domain}10",
+                          "auth_pass_deprecated": "Han.2010",
+                          "handler": "forward_proxy",
+                          "hide_ip": true,
+                          "hide_via": true,
+                          "probe_resistance": {}
+                        },
                       ]
                     },
                     {
                       "match": [
                         {
                           "host": [
-                            "$domain"
+                            "$domain.hellotk.me"
                           ]
                         }
                       ],
@@ -345,7 +412,7 @@ caddy_config() {
             {
               "match": {
                 "sni": [
-                  "$domain"
+                  "$domain.hellotk.me"
                 ]
               }
             }
@@ -360,8 +427,8 @@ caddy_config() {
       "certificates": {
         "load_files": [
           {
-            "certificate": "/etc/letsencrypt/live/$domain/fullchain.pem",
-            "key": "/etc/letsencrypt/live/$domain/privkey.pem"
+            "certificate": "/etc/letsencrypt/live/$domain.hellotk.me/fullchain.pem",
+            "key": "/etc/letsencrypt/live/$domain.hellotk.me/privkey.pem"
           }
         ]
       }
@@ -417,16 +484,16 @@ config() {
     # 生成密码
     # /etc/letsencrypt/live/x.dongvps.com/
 
-    if [[ $(ls /etc/letsencrypt/live/ | pgrep "$domain") ]] ;then
+    if [[ $(ls /etc/letsencrypt/live/ | pgrep "$domain.hellotk.me") ]] ;then
         certbot renew
     else
-        certbot certonly --standalone -d $domain --agree-to --email $email
+        certbot certonly --standalone -d $domain.hellotk.me --agree-to --email $email
     fi
     # 生成json
 
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-    _sys_timezone
-    _sys_time
+    # ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+    # _sys_timezone
+    # _sys_time
 
 }
 
@@ -489,7 +556,7 @@ edit_config() {
                       "match": [
                         {
                           "host": [
-                            "$domain"
+                            "$domain.hellotk.me"
                           ]
                         }
                       ],
@@ -513,7 +580,7 @@ edit_config() {
             {
               "match": {
                 "sni": [
-                  "$domain"
+                  "$domain.hellotk.me"
                 ]
               }
             }
@@ -528,8 +595,8 @@ edit_config() {
       "certificates": {
         "load_files": [
           {
-            "certificate": "/etc/letsencrypt/live/$domain/fullchain.pem",
-            "key": "/etc/letsencrypt/live/$domain/privkey.pem"
+            "certificate": "/etc/letsencrypt/live/$domain.hellotk.me/fullchain.pem",
+            "key": "/etc/letsencrypt/live/$domain.hellotk.me/privkey.pem"
           }
         ]
       }
@@ -546,7 +613,7 @@ EOF
     echo "........... Naiveproxy 设置自动启动完成  .........."
     
     echo > /etc/caddy/.autoconfig
-    echo -e "域名domain   =$domain" >> /etc/caddy/.autoconfig
+    echo -e "域名domain   =$domain.hellotk.me" >> /etc/caddy/.autoconfig
     echo -e "端口port     =$naive_port" >> /etc/caddy/.autoconfig
     echo -e "用户名user   =$user" >> /etc/caddy/.autoconfig
     echo -e "密码password =$password" >> /etc/caddy/.autoconfig
@@ -601,7 +668,7 @@ show_config_info() {
     clear
     # mkdir -p .local/share/caddy/config
     echo > /etc/caddy/.autoconfig
-    echo -e "域名domain   =$domain" >> /etc/caddy/.autoconfig
+    echo -e "域名domain   =$domain.hellotk.me" >> /etc/caddy/.autoconfig
     echo -e "端口port     =$naive_port" >> /etc/caddy/.autoconfig
     echo -e "用户名user   =User" >> /etc/caddy/.autoconfig
     echo -e "密码password =$password" >> /etc/caddy/.autoconfig
