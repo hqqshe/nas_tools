@@ -74,7 +74,7 @@ else
 
 fi
 
-uuid=$(cat /proc/sys/kernel/random/uuid)
+# uuid=$(cat /proc/sys/kernel/random/uuid)
 systemd=true
 # _test=true
 
@@ -108,30 +108,31 @@ _sys_time() {
 naive_config() {
 
     echo
+    naive_port=4433
 
-    while :; do
-        echo -e "请输入 "$yellow"NaiveProxy"$none" 端口 ["$magenta"1-65535"$none"]，不能选择 "$magenta"80"$none"端口"
-        read -p "$(echo -e "(默认端口: ${cyan}4433$none):")" naive_port
-        [ -z "$naive_port" ] && naive_port=4433
-        case $naive_port in
-        80)
-            echo
-            echo " ...都说了不能选择 80 端口了咯....."
-            error
-            ;;
-        [1-9] | [1-9][0-9] | [1-9][0-9][0-9] | [1-9][0-9][0-9][0-9] | [1-5][0-9][0-9][0-9][0-9] | 6[0-4][0-9][0-9][0-9] | 65[0-4][0-9][0-9] | 655[0-3][0-5])
-            echo
-            echo
-            echo -e "$yellow naive_port 端口 = $cyan$naive_port$none"
-            echo "----------------------------------------------------------------"
-            echo
-            break
-            ;;
-        *)
-            error
-            ;;
-        esac
-    done
+    # while :; do
+    #     echo -e "请输入 "$yellow"NaiveProxy"$none" 端口 ["$magenta"1-65535"$none"]，不能选择 "$magenta"80"$none"端口"
+    #     read -p "$(echo -e "(默认端口: ${cyan}4433$none):")" naive_port
+    #     [ -z "$naive_port" ] && naive_port=4433
+    #     case $naive_port in
+    #     80)
+    #         echo
+    #         echo " ...都说了不能选择 80 端口了咯....."
+    #         error
+    #         ;;
+    #     [1-9] | [1-9][0-9] | [1-9][0-9][0-9] | [1-9][0-9][0-9][0-9] | [1-5][0-9][0-9][0-9][0-9] | 6[0-4][0-9][0-9][0-9] | 65[0-4][0-9][0-9] | 655[0-3][0-5])
+    #         echo
+    #         echo
+    #         echo -e "$yellow naive_port 端口 = $cyan$naive_port$none"
+    #         echo "----------------------------------------------------------------"
+    #         echo
+    #         break
+    #         ;;
+    #     *)
+    #         error
+    #         ;;
+    #     esac
+    # done
 
     while :; do
         echo
@@ -157,12 +158,12 @@ naive_config() {
     #     break
     # done
     get_ip
-    echo
-    echo
-    echo -e "$yellow 请将 $magenta$domain.hellotk.me$none $yellow 解析到: $cyan$ip$none"
-    echo
-    echo -e "$yellow 请将 $magenta$domain.hellotk.me$none $yellow 解析到: $cyan$ip$none"
-    echo
+    # echo
+    # echo
+    # echo -e "$yellow 请将 $magenta$domain.hellotk.me$none $yellow 解析到: $cyan$ip$none"
+    # echo
+    # echo -e "$yellow 请将 $magenta$domain.hellotk.me$none $yellow 解析到: $cyan$ip$none"
+    # echo
     echo -e "$yellow 请将 $magenta$domain.hellotk.me$none $yellow 解析到: $cyan$ip$none"
     echo "----------------------------------------------------------------"
     echo
@@ -719,7 +720,7 @@ install() {
     # 配置代理信息，比如域名
     naive_config
     # blocked_hosts
-    install_info
+    # install_info
     # [[ $caddy ]] && domain_check
     allow_port
     install_certbot
