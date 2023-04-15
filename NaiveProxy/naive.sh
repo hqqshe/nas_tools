@@ -157,7 +157,7 @@ naive_config() {
     #     echo "----------------------------------------------------------------"
     #     break
     # done
-    get_ip
+    # get_ip
     # echo
     # echo
     # echo -e "$yellow 请将 $magenta$domain.hellotk.me$none $yellow 解析到: $cyan$ip$none"
