@@ -420,7 +420,7 @@ config() {
     mkdir /etc/caddy/
     mkdir /var/www/ -p
 
-    wget -c https://raw.githubusercontent.com/imajeason/nas_tools/main/NaiveProxy/html.tar.gz -O - | tar -xz -C /var/www/
+    wget -c https://raw.githubusercontent.com/hqqshe/nas_tools/main/NaiveProxy/html.tar.gz -O - | tar -xz -C /var/www/
     # 生成密码
     # /etc/letsencrypt/live/x.dongvps.com/
 
@@ -706,7 +706,7 @@ show_cert(){
 }
 
 optimize(){
-    curl https://raw.githubusercontent.com/imajeason/nas_tools/main/NaiveProxy/optimize.sh | bash -
+    curl https://raw.githubusercontent.com/hqqshe/nas_tools/main/NaiveProxy/optimize.sh | bash -
 }
 
 cert_renew(){
@@ -721,7 +721,7 @@ cert_renew(){
 }
 
 shell_renew(){
-    curl -o /root/.naive.sh https://raw.githubusercontent.com/imajeason/nas_tools/main/NaiveProxy/naive.sh 
+    curl -o /root/.naive.sh https://raw.githubusercontent.com/hqqshe/nas_tools/main/NaiveProxy/naive.sh 
     chmod +x /root/.naive.sh
     echo
     echo -e "$red naive更新完成，请重新执行naive $none"
@@ -796,9 +796,9 @@ while :; do
     echo
     echo " 2. 显示信息 Show Info"
     echo
-    echo " 3. 修改配置 Edit"
+    echo " 3. 重新获取证书 Cert Config"
     echo
-    echo " 4. 优化 Optimize"
+    echo " 4. 获取ip get_ip"
     echo
     echo " 5. 证书详情 Cert Info"
     echo
@@ -825,11 +825,11 @@ while :; do
         break
         ;;
     3)
-        edit_config
+        config
         break
         ;;
     4)
-        optimize
+        get_ip
         break
         ;;
     5)
