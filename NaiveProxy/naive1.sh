@@ -59,6 +59,7 @@ if [[ $(command -v apt-get) || $(command -v yum) ]] && [[ $(command -v systemctl
     fi
     if [[ $(command -v apt-get) ]]; then
 
+        apt-get update -y
         apt-get install curl -y
 
     fi
@@ -84,9 +85,9 @@ _sys_timezone() {
     fi
 
     echo
-    timedatectl set-timezone America/Los_Angeles
+    timedatectl set-timezone  America/Los_Angeles
     timedatectl set-ntp true
-    echo "已将你的主机设置为America/Los_Angeles时区并通过systemd-timesyncd自动同步时间。"
+    echo "已将你的主机设置为 America/Los_Angeles 时区并通过systemd-timesyncd自动同步时间。"
     echo
 
     if [[ $IS_OPENVZ ]]; then
@@ -285,208 +286,174 @@ install_certbot() {
 
 
 caddy_config() {
-cat > /etc/caddy/caddy_config.json << EOF
-{
-  "admin": {
-    "disabled": true
-  },
-  "apps": {
-    "http": {
-      "servers": {
-        "srv0": {
-          "listen": [
-            ":$naive_port"
-          ],
-          "routes": [
-            {
-              "handle": [
-                {
-                  "handler": "subroute",
-                  "routes": [
-                    {
-                      "handle": [
-                        {
-                          "auth_user_deprecated": "${domain}01",
-                          "auth_pass_deprecated": "Han.2001",
-                          "handler": "forward_proxy",
-                          "hide_ip": true,
-                          "hide_via": true,
-                          "probe_resistance": {}
-                        }]
-                    }, {
-                      "handle": [
-                         {
-                          "auth_user_deprecated": "${domain}02",
-                          "auth_pass_deprecated": "Han.2002",
-                          "handler": "forward_proxy",
-                          "hide_ip": true,
-                          "hide_via": true,
-                          "probe_resistance": {}
-                        }]
-                    }, {
-                      "handle": [
-                         {
-                          "auth_user_deprecated": "${domain}03",
-                          "auth_pass_deprecated": "Han.2003",
-                          "handler": "forward_proxy",
-                          "hide_ip": true,
-                          "hide_via": true,
-                          "probe_resistance": {}
-                        }]
-                    }, {
-                      "handle": [
-                         {
-                          "auth_user_deprecated": "${domain}04",
-                          "auth_pass_deprecated": "Han.2004",
-                          "handler": "forward_proxy",
-                          "hide_ip": true,
-                          "hide_via": true,
-                          "probe_resistance": {}
-                        }]
-                    }, {
-                      "handle": [
-                         {
-                          "auth_user_deprecated": "${domain}05",
-                          "auth_pass_deprecated": "Han.2005",
-                          "handler": "forward_proxy",
-                          "hide_ip": true,
-                          "hide_via": true,
-                          "probe_resistance": {}
-                        }]
-                    },  {
-                      "handle": [ {
-                          "auth_user_deprecated": "${domain}06",
-                          "auth_pass_deprecated": "Han.2006",
-                          "handler": "forward_proxy",
-                          "hide_ip": true,
-                          "hide_via": true,
-                          "probe_resistance": {}
-                        }]
-                    }, {
-                      "handle": [{
-                          "auth_user_deprecated": "${domain}07",
-                          "auth_pass_deprecated": "Han.2007",
-                          "handler": "forward_proxy",
-                          "hide_ip": true,
-                          "hide_via": true,
-                          "probe_resistance": {}
-                        }]
-                    }, {
-                      "handle": [{
-                          "auth_user_deprecated": "${domain}08",
-                          "auth_pass_deprecated": "Han.2008",
-                          "handler": "forward_proxy",
-                          "hide_ip": true,
-                          "hide_via": true,
-                          "probe_resistance": {}
-                        }]
-                    }, {
-                      "handle": [{
-                          "auth_user_deprecated": "${domain}09",
-                          "auth_pass_deprecated": "Han.2009",
-                          "handler": "forward_proxy",
-                          "hide_ip": true,
-                          "hide_via": true,
-                          "probe_resistance": {}
-                        }]
-                    }, {
-                      "handle": [
-                        {
-                          "auth_user_deprecated": "${domain}10",
-                          "auth_pass_deprecated": "Han.2010",
-                          "handler": "forward_proxy",
-                          "hide_ip": true,
-                          "hide_via": true,
-                          "probe_resistance": {}
-                        }]
-                    }, {
-                      "match": [
-                        {
-                          "host": [
-                            "$domain.hellotk.me"
-                          ]
-                        }
-                      ],
-                      "handle": [
-                        {
-                          "handler": "file_server",
-                          "root": "/var/www/html",
-                          "index_names": [
-                            "index.html"
-                          ]
-                        }
-                      ],
-                      "terminal": true
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "tls_connection_policies": [
-            {
-              "match": {
-                "sni": [
-                  "$domain.hellotk.me"
+  domain="example"
+  naive_port="3080"
+  cat > caddy_config.json << EOF
+  {
+    "admin": {
+      "disabled": true
+    },
+    "apps": {
+      "http": {
+        "servers": {
+          "srv0": {
+            "listen": [
+              ":$naive_port"
+            ],
+            "routes": [
+              {
+                "handle": [
+                  {
+                    "handler": "subroute",
+                    "routes": [
+                      {
+                        "handle": [
+                          {
+                            "auth_user_deprecated": "${domain}01",
+                            "auth_pass_deprecated": "Han.2001",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          }]
+                      }, {
+                        "handle": [
+                          {
+                            "auth_user_deprecated": "${domain}02",
+                            "auth_pass_deprecated": "Han.2002",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          }]
+                      }, {
+                        "handle": [
+                          {
+                            "auth_user_deprecated": "${domain}03",
+                            "auth_pass_deprecated": "Han.2003",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          }]
+                      }, {
+                        "handle": [
+                          {
+                            "auth_user_deprecated": "${domain}04",
+                            "auth_pass_deprecated": "Han.2004",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          }]
+                      }, {
+                        "handle": [
+                          {
+                            "auth_user_deprecated": "${domain}05",
+                            "auth_pass_deprecated": "Han.2005",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          }]
+                      },  {
+                        "handle": [ {
+                            "auth_user_deprecated": "${domain}06",
+                            "auth_pass_deprecated": "Han.2006",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          }]
+                      }, {
+                        "handle": [{
+                            "auth_user_deprecated": "${domain}07",
+                            "auth_pass_deprecated": "Han.2007",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          }]
+                      }, {
+                        "handle": [{
+                            "auth_user_deprecated": "${domain}08",
+                            "auth_pass_deprecated": "Han.2008",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          }]
+                      }, {
+                        "handle": [{
+                            "auth_user_deprecated": "${domain}09",
+                            "auth_pass_deprecated": "Han.2009",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          }]
+                      }, {
+                        "handle": [
+                          {
+                            "auth_user_deprecated": "${domain}10",
+                            "auth_pass_deprecated": "Han.2010",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          }]
+                      }, {
+                        "match": [
+                          {
+                            "host": [
+                              "$domain.hellotk.me"
+                            ]
+                          }
+                        ],
+                        "handle": [
+                          {
+                            "handler": "file_server",
+                            "root": "/var/www/html",
+                            "index_names": [
+                              "index.html"
+                            ]
+                          }
+                        ],
+                        "terminal": true
+                      }
+                    ]
+                  }
                 ]
               }
+            ],
+            "tls_connection_policies": [
+              {
+                "match": {
+                  "sni": [
+                    "$domain.hellotk.me"
+                  ]
+                }
+              }
+            ],
+            "automatic_https": {
+              "disable": true
             }
-          ],
-          "automatic_https": {
-            "disable": true
           }
         }
-      }
-    },
-    "tls": {
-      "certificates": {
-        "load_files": [
-          {
-            "certificate": "/etc/letsencrypt/live/$domain.hellotk.me/fullchain.pem",
-            "key": "/etc/letsencrypt/live/$domain.hellotk.me/privkey.pem"
-          }
-        ]
+      },
+      "tls": {
+        "certificates": {
+          "load_files": [
+            {
+              "certificate": "/etc/letsencrypt/live/$domain.hellotk.me/fullchain.pem",
+              "key": "/etc/letsencrypt/live/$domain.hellotk.me/privkey.pem"
+            }
+          ]
+        }
       }
     }
   }
-}
-EOF
-
-cat > /etc/systemd/system/naive.service << EOF
-[Unit]
-Description=Caddy
-Documentation=https://caddyserver.com/docs/
-After=network.target network-online.target
-Requires=network-online.target
-
-[Service]
-Type=notify
-User=root
-Group=root
-ExecStart=/usr/bin/caddy run --environ --config /etc/caddy/caddy_config.json
-ExecReload=/usr/bin/caddy reload --config /etc/caddy/caddy_config.json
-TimeoutStopSec=5s
-LimitNOFILE=1048576
-LimitNPROC=512
-PrivateTmp=true
-ProtectSystem=full
-AmbientCapabilities=CAP_NET_BIND_SERVICE
-
-[Install]
-WantedBy=multi-user.target
-EOF
-    systemctl daemon-reload
-    do_service restart naive
-    echo 
-    echo "........... NaiveProxy 已启动  .........." 
-    do_service enable naive
-    echo 
-    echo "........... NaiveProxy 设置自动启动完成 .........." 
-
-    echo 
-    echo "........... NaiveProxy 服务状态,按q继续  .........."                         
-    do_service  status naive --no-pager
-    netstat -nltp |grep caddy
+  EOF
 }
 
 config() {

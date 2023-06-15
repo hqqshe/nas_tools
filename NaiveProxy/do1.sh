@@ -28,7 +28,7 @@ else
 fi
 
 
-    curl -o /root/.naive.sh https://raw.githubusercontent.com/hqqshe/nas_tools/main/NaiveProxy/naive.sh 
+    curl -o /root/.naive.sh https://raw.githubusercontent.com/hqqshe/nas_tools/main/NaiveProxy/naive1.sh 
     chmod +x /root/.naive.sh
     ln -s /root/.naive.sh /usr/bin/naive
     echo
