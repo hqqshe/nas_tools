@@ -311,19 +311,19 @@ for i in {1..50}
 do
 
 if [[ $i -ne 1 ]]; then
-cat >> caddy_config.json <<EOF
+cat >> /etc/caddy/caddy_config.json <<EOF
                     ,
 EOF
 fi
 
-cat >> caddy_config.json <<EOF
+cat >> /etc/caddy/caddy_config.json <<EOF
                     {
                       "handle": [{"handler": "forward_proxy", "hide_ip": true, "hide_via": true,"probe_resistance": {},"auth_user_deprecated": "${domain}$i", "auth_pass_deprecated": "Han.20$i"}]
                     }
 EOF
 done
 
-cat >> caddy_config.json <<EOF
+cat >> /etc/caddy/caddy_config.json <<EOF
                     ,{
                       "match": [
                         {
