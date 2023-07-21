@@ -1,0 +1,71 @@
+{
+  "admin": {
+    "disabled": true
+  },
+  "apps": {
+    "http": {
+      "servers": {
+        "srv0": {
+          "listen": [
+            ":4433"
+          ],
+          "routes": [
+            {
+              "handle": [
+                {
+                  "handler": "subroute",
+                  "routes": [
+                    {
+                      "handle": [{"auth_user_deprecated": "mc0101","auth_pass_deprecated": "Han.2001","handler": "forward_proxy","hide_ip": true,"hide_via": true,"probe_resistance": {}}]
+                    },
+                    {
+                      "match": [
+                        {
+                          "host": [
+                            "mc01.hellotk.me"
+                          ]
+                        }
+                      ],
+                      "handle": [
+                        {
+                          "handler": "file_server",
+                          "root": "/var/www/html",
+                          "index_names": [
+                            "index.html"
+                          ]
+                        }
+                      ],
+                      "terminal": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "tls_connection_policies": [
+            {
+              "match": {
+                "sni": [
+                  "mc01.hellotk.me"
+                ]
+              }
+            }
+          ],
+          "automatic_https": {
+            "disable": true
+          }
+        }
+      }
+    },
+    "tls": {
+      "certificates": {
+        "load_files": [
+          {
+            "certificate": "/etc/letsencrypt/live/mc01.hellotk.me/fullchain.pem",
+            "key": "/etc/letsencrypt/live/mc01.hellotk.me/privkey.pem"
+          }
+        ]
+      }
+    }
+  }
+}

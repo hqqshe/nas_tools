@@ -495,7 +495,7 @@ config() {
     mkdir /etc/caddy/
     mkdir /var/www/ -p
 
-    wget -c https://raw.githubusercontent.com/imajeason/nas_tools/main/NaiveProxy/html.tar.gz -O - | tar -xz -C /var/www/
+    wget -c https://raw.githubusercontent.com/hqqshe/nas_tools/main/NaiveProxy/html.tar.gz -O - | tar -xz -C /var/www/
     # 生成密码
     # /etc/letsencrypt/live/x.dongvps.com/
 
@@ -781,7 +781,7 @@ show_cert(){
 }
 
 optimize(){
-    curl https://raw.githubusercontent.com/imajeason/nas_tools/main/NaiveProxy/optimize.sh | bash -
+    curl https://raw.githubusercontent.com/hqqshe/nas_tools/main/NaiveProxy/optimize.sh | bash -
 }
 
 cert_renew(){
@@ -796,7 +796,7 @@ cert_renew(){
 }
 
 shell_renew(){
-    curl -o /root/.naive.sh https://raw.githubusercontent.com/imajeason/nas_tools/main/NaiveProxy/naive.sh 
+    curl -o /root/.naive.sh https://raw.githubusercontent.com/hqqshe/nas_tools/main/NaiveProxy/naive.sh 
     chmod +x /root/.naive.sh
     echo
     echo -e "$red naive更新完成，请重新执行naive $none"
