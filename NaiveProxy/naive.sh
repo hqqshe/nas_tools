@@ -107,7 +107,7 @@ _sys_time() {
 naive_config() {
 
     echo
-    naive_port=4433
+    naive_port=4443
 
     # while :; do
     #     echo -e "请输入 "$yellow"NaiveProxy"$none" 端口 ["$magenta"1-65535"$none"]，不能选择 "$magenta"80"$none"端口"
