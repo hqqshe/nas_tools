@@ -85,6 +85,7 @@ _sys_timezone() {
 
     echo
     timedatectl set-timezone America/Los_Angeles
+    #timedatectl set-timezone Asia/Hong_Kong
     timedatectl set-ntp true
     echo "已将你的主机设置为America/Los_Angeles时区并通过systemd-timesyncd自动同步时间。"
     echo

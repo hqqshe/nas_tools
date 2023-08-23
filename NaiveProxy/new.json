@@ -1,0 +1,177 @@
+{
+    "admin": {
+      "disabled": true
+    },
+    "apps": {
+      "http": {
+        "servers": {
+          "srv0": {
+            "listen": [
+              ":4433"
+            ],
+            "routes": [
+              {
+                "handle": [
+                  {
+                    "handler": "subroute",
+                    "routes": [
+                      {
+                        "handle": [
+                          {
+                            "auth_user_deprecated": "bw0101",
+                            "auth_pass_deprecated": "Han.2001",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          }
+                          ]
+                      },
+                      {
+                        "handle": [
+                           {
+                            "auth_user_deprecated": "bw0102",
+                            "auth_pass_deprecated": "Han.2002",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          } ]
+                      },
+                      {
+                        "handle": [
+                           {
+                            "auth_user_deprecated": "bw0103",
+                            "auth_pass_deprecated": "Han.2003",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          } ]
+                      },
+                      {
+                        "handle": [
+                           {
+                            "auth_user_deprecated": "bw0104",
+                            "auth_pass_deprecated": "Han.2004",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          } ]
+                      },
+                      {
+                        "handle": [
+                           {
+                            "auth_user_deprecated": "bw0105",
+                            "auth_pass_deprecated": "Han.2005",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          } ]
+                      },
+                      {
+                        "handle": [ {
+                            "auth_user_deprecated": "bw0106",
+                            "auth_pass_deprecated": "Han.2006",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          } ]
+                      },
+                      {
+                        "handle": [{
+                            "auth_user_deprecated": "bw0107",
+                            "auth_pass_deprecated": "Han.2007",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          } ]
+                      },
+                      {
+                        "handle": [{
+                            "auth_user_deprecated": "bw0108",
+                            "auth_pass_deprecated": "Han.2008",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          } ]
+                      },
+                      {
+                        "handle": [{
+                            "auth_user_deprecated": "bw0109",
+                            "auth_pass_deprecated": "Han.2009",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          } ]
+                      },
+                      {
+                        "handle": [
+                          {
+                            "auth_user_deprecated": "bw0110",
+                            "auth_pass_deprecated": "Han.2010",
+                            "handler": "forward_proxy",
+                            "hide_ip": true,
+                            "hide_via": true,
+                            "probe_resistance": {}
+                          }
+                        ]
+                      },
+                      {
+                        "match": [
+                          {
+                            "host": [
+                              "bw01.hellotk.me"
+                            ]
+                          }
+                        ],
+                        "handle": [
+                          {
+                            "handler": "file_server",
+                            "root": "/var/www/html",
+                            "index_names": [
+                              "index.html"
+                            ]
+                          }
+                        ],
+                        "terminal": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "tls_connection_policies": [
+              {
+                "match": {
+                  "sni": [
+                    "bw01.hellotk.me"
+                  ]
+                }
+              }
+            ],
+            "automatic_https": {
+              "disable": true
+            }
+          }
+        }
+      },
+      "tls": {
+        "certificates": {
+          "load_files": [
+            {
+              "certificate": "/etc/letsencrypt/live/bw01.hellotk.me/fullchain.pem",
+              "key": "/etc/letsencrypt/live/bw01.hellotk.me/privkey.pem"
+            }
+          ]
+        }
+      }
+    }
+  }
+  
